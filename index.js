@@ -1,15 +1,15 @@
 const comparator_info = [
   {
       button_name: "Je sélectionne mes besoins",
-      information: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"
+      information: "Choose your play here"
   },
   {
       button_name: "Je sélectionne mes usages",
-      information: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"
+      information: "Choose your usage here"
   },
   {
       button_name: "Mon code postal et ma commune",
-      information: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"
+      information: "Input your postal code and commune here"
   }
 ];
 
@@ -26,11 +26,30 @@ const select_info = [
   {
     play: "fixe"
   }
-]
+];
+
+const select_usage = [
+  {
+    usage: "Moins de 5 GB"
+  },
+  {
+    usage: "5 à 20 GB"
+  },
+  {
+    usage: "20 à 50 GB"
+  },
+  {
+    usage: "Plus de 50 GB"
+  }
+];
+
 
 const accordionContainer = document.getElementById('accordion-container');
 
 let firstPanel;
+let secondPanel;
+let thirdPanel;
+
 
 comparator_info.map((item, index) => {
   // Create the button element
@@ -47,6 +66,10 @@ comparator_info.map((item, index) => {
 
   if (index === 0) {
     firstPanel = div_panel;
+  } else if (index === 1) {
+    secondPanel = div_panel;
+  } else if (index === 2) {
+    thirdPanel = div_panel;
   }
 
   // Add event listener to toggle the panel
@@ -62,6 +85,7 @@ comparator_info.map((item, index) => {
   });
 });
 
+// first panel content
 const select = document.createElement('select');
 select.classList.add('select');
 
@@ -74,4 +98,29 @@ select_info.map((item) => {
 
 if (firstPanel) {
   firstPanel.appendChild(select);
+}
+
+// second panel content
+const selectUsage = document.createElement('select');
+selectUsage.classList.add('select');
+
+select_usage.forEach((item) => {
+  const option = document.createElement('option');
+  option.textContent = item.usage;
+  option.value = item.usage; // Set the value attribute for the option
+  selectUsage.appendChild(option);
+});
+
+
+if (secondPanel) {
+  secondPanel.appendChild(selectUsage);
+}
+
+// third panel content
+const postal_code = document.createElement('input');
+postal_code.type = 'text';
+postal_code.placeholder = 'Code postal';
+
+if (thirdPanel) {
+  thirdPanel.appendChild(postal_code);
 }
